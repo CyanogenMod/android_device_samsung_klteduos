@@ -5,7 +5,6 @@ LOCAL_PATH := $(call my-dir)
 ## parts of the build environment
 
 ## Imported from the original makefile...
-KERNEL_CONFIG := $(KERNEL_OUT)/.config
 G2_DTS_NAMES := msm8974
 
 G2_DTS_FILES = $(wildcard $(TOP)/$(TARGET_KERNEL_SOURCE)/arch/arm/boot/dts/msm8974pro/msm8974pro-ac-sec-kkor*.dts) $(wildcard $(TOP)/$(TARGET_KERNEL_SOURCE)/arch/arm/boot/dts/msm8974pro/msm8974pro-ac-sec-k-*.dts)
