@@ -55,13 +55,20 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
     property_get("ro.bootloader", bootloader);
 
     if (strstr(bootloader, "G900FD")) {
-        /* klteduoszn */
+        /* klteduosxx */
         property_set("ro.build.fingerprint", "samsung/klteduos/klteduos:5.0/LRX21T/G900FDXXU1BOE2:user/release-keys");
         property_set("ro.build.description", "klteduos-user 5.0 LRX21T G900FDXXU1BOE2 release-keys");
         property_set("ro.product.model", "SM-G900FD");
         property_set("ro.product.device", "klteduos");
         gsm_properties();
-    } 
+    } else if (strstr(bootloader, "G900MD")) {
+        /* klteduosub */
+        property_set("ro.build.fingerprint", "samsung/klteduosub/klte:5.0/LRX21T/G900MDUBU1BOB2:user/release-keys");
+        property_set("ro.build.description", "klteduosub-user 5.0 LRX21T G900MDUBU1BOB2 release-keys");
+        property_set("ro.product.model", "SM-G900MD");
+        property_set("ro.product.device", "klte");
+        gsm_properties();
+    }
 
     property_get("ro.product.device", device);
     strlcpy(devicename, device, sizeof(devicename));
@@ -70,7 +77,7 @@ void init_msm_properties(unsigned long msm_id, unsigned long msm_ver, char *boar
 
 void gsm_properties()
 {
-    property_set("telephony.lteOnGsmDevice", "0");
-    property_set("ro.telephony.default_network", "0");
+    property_set("telephony.lteOnGsmDevice", "1");
+    property_set("ro.telephony.default_network", "9");
     property_set("ro.telephony.ril.config", "newDialCode");
 }
