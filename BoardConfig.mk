@@ -23,7 +23,6 @@ AUDIO_FEATURE_SAMSUNG_DUAL_SIM := true
 
 # Kernel
 TARGET_KERNEL_VARIANT_CONFIG := msm8974pro_sec_klte_duos_defconfig
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/klteduos/mkbootimg.mk
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_msm
