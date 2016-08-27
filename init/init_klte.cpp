@@ -37,8 +37,6 @@
 
 #include "init_msm8974.h"
 
-#define ISMATCH(a, b) (!strncmp((a), (b), PROP_VALUE_MAX))
-
 void gsm_properties()
 {
     property_set("telephony.lteOnGsmDevice", "1");
@@ -48,26 +46,20 @@ void gsm_properties()
 
 void init_target_properties()
 {
-    char platform[PROP_VALUE_MAX];
-    char bootloader[PROP_VALUE_MAX];
-    char device[PROP_VALUE_MAX];
-    char devicename[PROP_VALUE_MAX];
-    int rc;
-
-    rc = property_get("ro.board.platform", platform);
-    if (!rc || !ISMATCH(platform, ANDROID_TARGET))
+    std::string platform = property_get("ro.board.platform");
+    if (platform != ANDROID_TARGET)
         return;
 
-    property_get("ro.bootloader", bootloader);
+    std::string bootloader = property_get("ro.bootloader");
 
-    if (strstr(bootloader, "G900FD")) {
+    if (bootloader.find("G900FD") == 0) {
         /* klteduosxx */
         property_set("ro.build.fingerprint", "samsung/klteduosxx/klte:6.0.1/MMB29M/G900FDXXU1CPE1:user/release-keys");
         property_set("ro.build.description", "klteduosxx-user 6.0.1 MMB29M G900FDXXU1CPE1 release-keys");
         property_set("ro.product.model", "SM-G900FD");
         property_set("ro.product.device", "klte");
         gsm_properties();
-    } else if (strstr(bootloader, "G900MD")) {
+    } else if (bootloader.find("G900MD") == 0) {
         /* klteduosub */
         property_set("ro.build.fingerprint", "samsung/klteduosub/klte:5.0/LRX21T/G900MDUBU1BOB2:user/release-keys");
         property_set("ro.build.description", "klteduosub-user 5.0 LRX21T G900MDUBU1BOB2 release-keys");
@@ -76,8 +68,7 @@ void init_target_properties()
         gsm_properties();
     }
 
-    property_get("ro.product.device", device);
-    strlcpy(devicename, device, sizeof(devicename));
-    INFO("Found bootloader id %s setting build properties for %s device\n", bootloader, devicename);
+    std::string device = property_get("ro.product.device");
+    INFO("Found bootloader id %s setting build properties for %s device\n", bootloader.c_str(), device.c_str());
 }
 
